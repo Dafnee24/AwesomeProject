@@ -1,28 +1,17 @@
 import React from 'react';
-import {Text, StyleSheet, View} from 'react-native';
+import {Text, StyleSheet} from 'react-native';
 
-type TitleProps = {
-  text: string;
-};
-
-const Title = ({text}: TitleProps) => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{text}</Text>
-    </View>
-  );
+const Title = ({label, color = 'black'}) => {
+  return <Text style={[styles.title, {color}]}>{label}</Text>;
 };
 
 export default Title;
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: 30,
-    alignItems: 'flex-starcenter',
-  },
   title: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#000',
+    marginBottom: 20,
+    textAlign: 'center',
   },
 });
