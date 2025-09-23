@@ -1,78 +1,86 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Alert} from 'react-native';
-import TextInput from './components/TextInput';
+import {StyleSheet, Text, View} from 'react-native';
 import Button from './components/Button';
-import Title from './components/Title';
+import TextInput from './components/TextInput';
 
-const Register = () => {
+const Registration = () => {
+  const [title, setTitle] = useState('Registration');
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
+
   const onRegister = () => {
-    const onlyNumbers = /^\d+$/;
-    if (!onlyNumbers.test(phone)) {
-      Alert.alert('Error', 'Phone Number hanya boleh berisi angka!');
-      return;
-    }
-    const formData = {
-      name,
-      username,
-      email,
-      address,
-      phone,
-    };
-    console.log('Data Registrasion:', {formData});
-    Alert.alert('Sukses', 'Registrasi berhasil');
+    setTitle(`Selamat Datang ${name}`);
+
+    console.log('Berikut data Registrasi');
+    console.log('Name:', name);
+    console.log('Username:', username);
+    console.log('Email:', email);
+    console.log('Address:', address);
+    console.log('Phone Number:', phone);
   };
+
+  const handlePhoneChange = value => {
+    const numericValue = value.replace(/[^0-9]/g, '');
+    setPhone(numericValue);
+  };
+
   return (
     <View style={styles.container}>
-      <Title label="Registration" />
+      <Text style={styles.title}>{title}</Text>
+
       <TextInput
-        placeholder="Masukkan Nama Lengkap Anda"
+        placeholder="Masukan nama lengkap anda"
         label="Name"
         value={name}
         onChangeText={setName}
       />
       <TextInput
-        placeholder="Masukkan Username Lengkap Anda"
+        placeholder="Masukan username anda"
         label="Username"
         value={username}
         onChangeText={setUsername}
       />
       <TextInput
-        placeholder="Masukkan Email Anda"
+        placeholder="Masukan email anda"
         label="Email"
         value={email}
-        onchangeText={setEmail}
+        onChangeText={setEmail}
       />
       <TextInput
-        placeholder="Masukkan Alamat Anda"
+        placeholder="Masukan alamat anda"
         label="Address"
         value={address}
         onChangeText={setAddress}
       />
       <TextInput
-        placeholder="Masukkan Nomor Telepon Anda"
+        placeholder="Masukan nomor telepon anda"
         label="Phone Number"
-        keyboardType="numeric"
-        maxLength={13}
         value={phone}
-        onChangeText={setPhone}
+        onChangeText={handlePhoneChange}
+        keyboardType="numeric"
       />
+
       <Button label="Register" onPress={onRegister} />
     </View>
   );
 };
 
-export default Register;
+export default Registration;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20,
-    justifyContent: 'flex-start',
+    paddingTop: 60,
+    paddingHorizontal: 30,
     backgroundColor: '#fff',
+    flex: 1,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: 'black',
+    marginBottom: 40,
   },
 });
