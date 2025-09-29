@@ -1,78 +1,90 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, Alert} from 'react-native';
-import TextInput from './components/TextInput';
-import Button from './components/Button';
-import Title from './components/Title';
+import {StyleSheet, View, Image} from 'react-native';
+import React from 'react';
 
-const Register = () => {
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [address, setAddress] = useState('');
-  const [phone, setPhone] = useState('');
-  const onRegister = () => {
-    const onlyNumbers = /^\d+$/;
-    if (!onlyNumbers.test(phone)) {
-      Alert.alert('Error', 'Phone Number hanya boleh berisi angka!');
-      return;
-    }
-    const formData = {
-      name,
-      username,
-      email,
-      address,
-      phone,
-    };
-    console.log('Data Registrasion:', {formData});
-    Alert.alert('Sukses', 'Registrasi berhasil');
-  };
+const Flexbox = () => {
   return (
     <View style={styles.container}>
-      <Title label="Registration" />
-      <TextInput
-        placeholder="Masukkan Nama Lengkap Anda"
-        label="Name"
-        value={name}
-        onChangeText={setName}
-      />
-      <TextInput
-        placeholder="Masukkan Username Lengkap Anda"
-        label="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        placeholder="Masukkan Email Anda"
-        label="Email"
-        value={email}
-        onchangeText={setEmail}
-      />
-      <TextInput
-        placeholder="Masukkan Alamat Anda"
-        label="Address"
-        value={address}
-        onChangeText={setAddress}
-      />
-      <TextInput
-        placeholder="Masukkan Nomor Telepon Anda"
-        label="Phone Number"
-        keyboardType="numeric"
-        maxLength={13}
-        value={phone}
-        onChangeText={setPhone}
-      />
-      <Button label="Register" onPress={onRegister} />
+      <View style={styles.topSection}>
+        <View style={styles.BlackBox} />
+        <View style={styles.YellowBox} />
+        <View style={styles.BlackBox} />
+      </View>
+
+      <View style={styles.middleSection}>
+        <Image
+          source={require('./assets/logounklab.png')}
+          style={styles.logo}
+          resizeMode="contain"
+        />
+      </View>
+
+      <View style={styles.bottomSection}>
+        <View style={styles.blackBox} />
+        <View style={styles.yellowBox} />
+        <View style={styles.blackBox} />
+      </View>
     </View>
   );
 };
 
-export default Register;
+export default Flexbox;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    backgroundColor: 'white',
+  },
+  topSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'flex-start',
-    backgroundColor: '#fff',
+    backgroundColor: 'purple',
+    paddingVertical: 50,
+    paddingHorizontal: 15,
+  },
+
+  BlackBox: {
+    width: 70,
+    height: 70,
+    backgroundColor: 'black',
+    marginRight: 20,
+  },
+
+  YellowBox: {
+    width: 70,
+    height: 70,
+    backgroundColor: 'yellow',
+    marginRight: 20,
+  },
+
+  middleSection: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+  },
+  logo: {
+    width: 300,
+    height: 100,
+    marginRight: 15,
+  },
+
+  bottomSection: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: 'lavender',
+    paddingVertical: 50,
+  },
+  blackBox: {
+    width: 70,
+    height: 70,
+    backgroundColor: 'black',
+  },
+  yellowBox: {
+    width: 70,
+    height: 70,
+    backgroundColor: 'yellow',
   },
 });
